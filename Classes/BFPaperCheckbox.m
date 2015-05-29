@@ -227,6 +227,9 @@ static NSString *const mark_eraseLongLine = @"largeCheckmarkLine2";
         return;
     }
     [self private_switchStatesAnimated:YES];
+    
+    // Notify our delegate that we changed states!
+    [self.delegate paperCheckboxChangedState:self];
 }
 
 
@@ -235,11 +238,6 @@ static NSString *const mark_eraseLongLine = @"largeCheckmarkLine2";
 {
     // Change states:
     self.isChecked = !self.isChecked;
-    //NSLog(@"self.isChecked: %@", self.isChecked ? @"YES" : @"NO");
-
-    // Notify our delegate that we changed states!
-    [self.delegate paperCheckboxChangedState:self];
-    
 
     if (self.isChecked) {
         // Shrink checkBOX:
@@ -269,9 +267,6 @@ static NSString *const mark_eraseLongLine = @"largeCheckmarkLine2";
         return;
     }
     self.isChecked = YES;
-    
-    // Notify our delegate that we changed states!
-    [self.delegate paperCheckboxChangedState:self];
 
     if (animated) {
         [self spinCheckboxAnimated:animated withAngle1:M_PI_4 andAngle2:-5*M_PI_4 andRadiusDenominator:4.f forDuration:bfPaperCheckbox_animationDurationConstant];
@@ -287,9 +282,6 @@ static NSString *const mark_eraseLongLine = @"largeCheckmarkLine2";
         return;
     }
     self.isChecked = NO;
-    
-    // Notify our delegate that we changed states!
-    [self.delegate paperCheckboxChangedState:self];
 
     if (animated) {
         [self shrinkAwayCheckmarkAnimated:animated];
